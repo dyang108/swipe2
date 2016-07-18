@@ -1,0 +1,26 @@
+<div id="sidebar" class="menu col-sm-3 col-md-2">
+  <a href="/"><img class="logo-with-text" src="img/swipetext3.png" alt="logo"></a>
+  <hr>
+  <div>
+    <ul class="nav nav-pills nav-stacked list-group">
+      <li class="list-group-item menu-item" ui-sref=".eat" ui-sref-active="active">
+        <span class="pull-left fa fa-cutlery" aria-hidden="true"></span>eat
+      </li>
+      <li class="list-group-item menu-item" ui-sref=".post" ui-sref-active="active">
+        <span class="pull-left fa fa-bullhorn" aria-hidden="true"></span>post
+      </li>
+      <li class="list-group-item menu-item" ui-sref=".profile" ui-sref-active="active">
+        <span class="pull-left fa fa-user" aria-hidden="true"></span>profile
+      </li>
+    </ul>
+    <div>
+      <img class="thumbnail propic pull-left" src="img/favicon.png" ng-src="{{propic}} " alt="my propic ">
+      <fb:login-button ng-show="!logged_in " class="login-btn " scope="public_profile,email " onlogin="window.location='/' ">
+      </fb:login-button>
+      <h4 class="username " ng-show="logged_in ">{{fullName}}</h4>
+    </div>
+  </div>
+</div>
+<div class="col-sm-9 col-md-10">
+  <div ui-view></div>
+</div>

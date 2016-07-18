@@ -1,0 +1,230 @@
+// styles.less
+// needs to be processed into css before deploy
+// initialize variables
+@base-color: #93EE8B;
+@dark-base-color: @base-color - #333;
+@darker-base-color: @dark-base-color - #222;
+@background: #fff;
+@secondary: #8b93ee;
+@menu-font-size: 24px;
+@base-font-family: Raleway;
+@black: #000;
+@break1: 768px;
+@break2: 992px;
+@break3: 1200px;
+@sidebar1: 218px;
+@sidebar2: 233px;
+@sidebar3: 283px;
+@img-size: 70px;
+body,
+html {
+  font-family: @base-font-family;
+  background-color: @secondary;
+  background-image: url('/img/dewick.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+}
+
+hr {
+  border-color: @black;
+}
+
+td {
+  vertical-align: middle !important;
+}
+
+img {
+  object-fit: cover;
+}
+
+a {
+  color: inherit;
+}
+
+.menu {
+  background-color: @base-color;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: right;
+  height: 100%;
+}
+
+.menu-item {
+  font-weight: bold;
+  font-size: @menu-font-size;
+  cursor: pointer;
+  cursor: hand;
+  border: 0;
+  background-color: @base-color;
+  &:hover {
+    background-color: @dark-base-color;
+  }
+}
+
+.active {
+  background-color: @dark-base-color;
+}
+
+.welcome {
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 20px;
+  text-align: center;
+  margin-top: 25vh;
+}
+
+.list-group-item {
+  &:first-child {
+    border-radius: 0;
+  }
+  &:last-child {
+    border-radius: 0;
+  }
+}
+
+.logo-with-text {
+  max-width: 100%;
+}
+
+.content {
+  background-color: @background;
+  padding: 10px;
+}
+
+.user-info {
+  bottom: 0;
+  position: absolute;
+  text-align: left;
+  max-height: @img-size + 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  img {
+    margin-right: 10px;
+  }
+  .username {
+    max-width: 100px;
+    font-weight: bold;
+  }
+}
+
+.propic {
+  height: @img-size;
+  width: @img-size;
+}
+
+.login-btn {
+  top: 25px;
+}
+
+.center {
+  margin: 0 auto;
+}
+
+.meal-post {
+  text-align: center;
+}
+
+.meal-table {
+  width: 100%;
+}
+
+.img-with-text {
+  img {
+    float: left;
+  }
+  .inner-text {
+    position: relative;
+    left: 10px;
+    top: 24px;
+    margin: 0;
+  }
+}
+
+.btn-primary {
+  color: @black;
+  background-color: @base-color;
+  border-color: @base-color;
+  &:hover {
+    color: @black;
+    background-color: @base-color - #333;
+    border-color: @base-color - #333;
+  }
+  &:active {
+    color: @black;
+    background-color: @base-color;
+    border-color: @base-color;
+    &:focus {
+      color: @black - #444;
+      background-color: @base-color - #444;
+      border-color: @base-color - #444;
+    }
+  }
+  &:focus {
+    color: @black;
+    background-color: @base-color;
+    border-color: @base-color;
+    &:hover {
+      color: @black;
+      background-color: @base-color - #333;
+      border-color: @base-color - #333;
+    }
+  }
+}
+
+.quick-post {
+  margin-top: 10px;
+}
+
+.cover {
+  height: 100vh;
+}
+
+// @media (min-width: @break1) {
+//   .menu {
+//     width: @sidebar1;
+//     top: 0;
+//     .user-info {
+//       width: @sidebar1 - 30px;
+//     }
+//   }
+// }
+
+// @media (min-width: @break2) {
+//   .menu {
+//     width: @sidebar2;
+//     position: fixed;
+//     top: 0;
+//     .user-info {
+//       width: @sidebar2 - 30px;
+//     }
+//   }
+// }
+
+// @media (min-width: @break3) {
+//   .menu {
+//     width: @sidebar3;
+//     .user-info {
+//       width: @sidebar3 - 30px;
+//     }
+//   }
+// }
+
+@font-face {
+  font-family: @base-font-family;
+  src: url('/fonts/raleway-regular.eot');
+  src: url('/fonts/raleway-regular.eot?#iefix') format('embedded-opentype'), url('/fonts/Raleway-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: @base-font-family;
+  font-weight: bold;
+  src: url('/fonts/raleway-semibold.eot');
+  src: url('/fonts/raleway-semibold.eot?#iefix') format('embedded-opentype'), url('/fonts/Raleway-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: @base-font-family;
+  font-style: italic;
+  src: url('/fonts/raleway-extralight.eot');
+  src: url('/fonts/raleway-extralight.eot?#iefix') format('embedded-opentype'), url('/fonts/Raleway-ExtraLightItalic.ttf') format('truetype');
+}
