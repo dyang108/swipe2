@@ -1,5 +1,3 @@
-class PostCtrl {
-  
-}
+class PostCtrl {}
 
 module.exports = PostCtrl

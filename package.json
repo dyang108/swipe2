@@ -4,7 +4,7 @@
   "description": "The new way to use every last meal.",
   "main": "index.js",
   "scripts": {
-    "test": "./test.sh"
+    "test": "gulp lint"
   },
   "repository": {
     "type": "git",
@@ -24,8 +24,7 @@
     "ejs": "^2.4.2",
     "express": "^4.13.4",
     "lodash": "^4.13.1",
-    "mongoose": "^4.4.17",
-    "mongoose-sanitizer": "^1.0.0"
+    "mongoose": "^4.4.17"
   },
   "devDependencies": {
     "babelify": "^7.3.0",
@@ -35,6 +34,7 @@
     "gulp-babel": "^6.1.2",
     "gulp-clean-css": "^2.0.10",
     "gulp-less": "^3.1.0",
+    "gulp-lesshint": "^2.0.0",
     "gulp-nodemon": "^2.1.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-standard": "^7.0.1",

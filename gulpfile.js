@@ -13,6 +13,7 @@ var less = require('gulp-less')
 var babelify = require('babelify')
 var cleanCSS = require('gulp-clean-css')
 var stringify = require('stringify')
+var lesshint = require('gulp-lesshint')
 
 gulp.task('browserify-dev', function () {
   // set up the browserify instance on a task basis
@@ -52,13 +53,23 @@ gulp.task('browserify', function () {
     .pipe(gulp.dest('client'))
 })
 
-gulp.task('lint', function () {
-  return gulp.src(['./client/**/*.js', '!./client/bundle.js'])
+gulp.task('jslint', function () {
+  return gulp.src(['./client/**/*.js', '!./client/dist/*'])
     .pipe(standard())
     .pipe(standard.reporter('default', {
       breakOnError: true
     }))
 })
+
+gulp.task('lesslint', function () {
+  return gulp.src('./client/css/*.less')
+        .pipe(lesshint({
+          failOnWarning: true
+        }))
+        .pipe(lesshint.reporter())
+})
+
+gulp.task('lint', ['jslint', 'lesslint'])
 
 gulp.task('less', function () {
   return gulp.src(['./client/css/styles.less'])
@@ -69,7 +80,7 @@ gulp.task('less', function () {
     .pipe(gulp.dest('./client/css/'))
 })
 
-gulp.task('run-dev', function () {
+gulp.task('default', function () {
   nodemon({
     script: 'server/index.js',
     ext: 'js html less',

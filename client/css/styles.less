@@ -1,14 +1,14 @@
 // styles.less
 // needs to be processed into css before deploy
 // initialize variables
-@base-color: #93EE8B;
-@dark-base-color: @base-color - #333;
-@darker-base-color: @dark-base-color - #222;
-@background: #fff;
+@base-color: #93ee8b;
+@dark-base-color: @base-color - #333333;
+@darker-base-color: @dark-base-color - #222222;
+@background: #ffffff;
 @secondary: #8b93ee;
 @menu-font-size: 24px;
 @base-font-family: Raleway;
-@black: #000;
+@black: #000000;
 @break1: 768px;
 @break2: 992px;
 @break3: 1200px;
@@ -16,13 +16,14 @@
 @sidebar2: 233px;
 @sidebar3: 283px;
 @img-size: 70px;
+
 body,
 html {
-  font-family: @base-font-family;
   background-color: @secondary;
   background-image: url('/img/dewick.jpg');
-  background-size: cover;
   background-repeat: no-repeat;
+  background-size: cover;
+  font-family: @base-font-family;
   height: 100%;
 }
 
@@ -44,18 +45,18 @@ a {
 
 .menu {
   background-color: @base-color;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  text-align: right;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2), 0px 6px 20px 0px rgba(0, 0, 0, 0.19);
   height: 100%;
+  text-align: right;
 }
 
 .menu-item {
-  font-weight: bold;
-  font-size: @menu-font-size;
+  background-color: @base-color;
+  border: 0px;
   cursor: pointer;
   cursor: hand;
-  border: 0;
-  background-color: @base-color;
+  font-size: @menu-font-size;
+  font-weight: bold;
   &:hover {
     background-color: @dark-base-color;
   }
@@ -66,19 +67,19 @@ a {
 }
 
 .welcome {
-  border-radius: 5px;
   background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+  margin-top: 25vh;
   padding: 20px;
   text-align: center;
-  margin-top: 25vh;
 }
 
 .list-group-item {
   &:first-child {
-    border-radius: 0;
+    border-radius: 0px;
   }
   &:last-child {
-    border-radius: 0;
+    border-radius: 0px;
   }
 }
 
@@ -92,18 +93,18 @@ a {
 }
 
 .user-info {
-  bottom: 0;
+  bottom: 0px;
+  max-height: @img-size + 20px;
+  overflow: hidden;
   position: absolute;
   text-align: left;
-  max-height: @img-size + 20px;
   white-space: nowrap;
-  overflow: hidden;
   img {
     margin-right: 10px;
   }
   .username {
-    max-width: 100px;
     font-weight: bold;
+    max-width: 100px;
   }
 }
 
@@ -112,102 +113,72 @@ a {
   width: @img-size;
 }
 
-.login-btn {
-  top: 25px;
-}
+// .login-btn {
+//   top: 25px;
+// }
 
 .center {
-  margin: 0 auto;
+  margin: 0px auto;
 }
 
-.meal-post {
-  text-align: center;
-}
+// .meal-post {
+//   text-align: center;
+// }
 
-.meal-table {
-  width: 100%;
-}
+// .meal-table {
+//   width: 100%;
+// }
 
-.img-with-text {
-  img {
-    float: left;
-  }
-  .inner-text {
-    position: relative;
-    left: 10px;
-    top: 24px;
-    margin: 0;
-  }
-}
+// .img-with-text {
+//   img {
+//     float: left;
+//   }
+//   .inner-text {
+//     position: relative;
+//     left: 10px;
+//     top: 24px;
+//     margin: 0px;
+//   }
+// }
 
 .btn-primary {
-  color: @black;
   background-color: @base-color;
   border-color: @base-color;
+  color: @black;
   &:hover {
+    background-color: @base-color - #333333;
+    border-color: @base-color - #333333;
     color: @black;
-    background-color: @base-color - #333;
-    border-color: @base-color - #333;
   }
   &:active {
-    color: @black;
     background-color: @base-color;
     border-color: @base-color;
+    color: @black;
     &:focus {
-      color: @black - #444;
-      background-color: @base-color - #444;
-      border-color: @base-color - #444;
+      background-color: @base-color - #444444;
+      border-color: @base-color - #444444;
+      color: @black - #444444;
     }
   }
   &:focus {
-    color: @black;
     background-color: @base-color;
     border-color: @base-color;
+    color: @black;
     &:hover {
+      background-color: @base-color - #333333;
+      border-color: @base-color - #333333;
       color: @black;
-      background-color: @base-color - #333;
-      border-color: @base-color - #333;
     }
   }
 }
 
-.quick-post {
-  margin-top: 10px;
-}
+// .quick-post {
+//   margin-top: 10px;
+// }
 
 .cover {
   height: 100vh;
 }
-
-// @media (min-width: @break1) {
-//   .menu {
-//     width: @sidebar1;
-//     top: 0;
-//     .user-info {
-//       width: @sidebar1 - 30px;
-//     }
-//   }
-// }
-
-// @media (min-width: @break2) {
-//   .menu {
-//     width: @sidebar2;
-//     position: fixed;
-//     top: 0;
-//     .user-info {
-//       width: @sidebar2 - 30px;
-//     }
-//   }
-// }
-
-// @media (min-width: @break3) {
-//   .menu {
-//     width: @sidebar3;
-//     .user-info {
-//       width: @sidebar3 - 30px;
-//     }
-//   }
-// }
 
 @font-face {
   font-family: @base-font-family;

@@ -1,5 +1,3 @@
-class EatCtrl {
-  
-}
+class EatCtrl {}
 
 module.exports = EatCtrl

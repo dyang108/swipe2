@@ -1,5 +1,3 @@
-class ProfileCtrl {
-  
-}
+class ProfileCtrl {}
 
 module.exports = ProfileCtrl
