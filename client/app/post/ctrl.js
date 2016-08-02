@@ -1,3 +1,7 @@
-class PostCtrl {}
+class PostCtrl {
+  constructor () {
+    this.meal = {}
+  }
+}
 
 module.exports = PostCtrl

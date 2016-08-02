@@ -2,4 +2,31 @@
   <span><h1>Post<span class="pull-right"><em>{{AppCtrl.date | date: 'h:mm a'}}</em></span></h1>
   </span>
   <hr>
+  <form novalidate class="meal-post">
+    <br>
+    <div class="input-group input-group-lg col-sm-3 center">
+      <span class="input-group-addon">Time</span>
+      <input class="form-control" type="time" ng-model="PostCtrl.meal.time" placeholder="{{AppCtrl.date}}">
+    </div>
+    <br>
+    <div class="input-group input-group-lg col-sm-6 col-md-4 center">
+      <span class="input-group-addon">Swipes to spare:</span>
+      <input class="form-control" type="number" ng-model="PostCtrl.meal.numswipes">
+    </div>
+    <br>
+    <h3>Dining hall:</h3>
+    <div class="radio">
+      <label>
+        <input name="hall" type="radio" ng-model="PostCtrl.hall" value="Carm">Carm</label>
+    </div>
+    <div class="radio">
+      <label>
+        <input name="hall" type="radio" ng-model="PostCtrl.hall" value="Dewick">Dewick</label>
+    </div>
+    <br>
+    <input class="btn btn-success" type="submit" ng-click="PostCtrl.postMeal(newmeal)">
+    <br>
+    <h3><label class="label label-primary" ng-show="PostCtrl.showMsg"></label></h3>
+    <br>
+  </form>
 </div>
