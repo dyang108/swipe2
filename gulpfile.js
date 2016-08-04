@@ -1,60 +1,48 @@
-'use strict'
-
-var browserify = require('browserify')
 var gulp = require('gulp')
+var sourcemaps = require('gulp-sourcemaps')
 var source = require('vinyl-source-stream')
 var buffer = require('vinyl-buffer')
-var uglify = require('gulp-uglify')
-var sourcemaps = require('gulp-sourcemaps')
-var gutil = require('gulp-util')
+var browserify = require('browserify')
+var babelify = require('babelify')
+var stringify = require('stringify')
 var nodemon = require('gulp-nodemon')
 var standard = require('gulp-standard')
 var less = require('gulp-less')
-var babelify = require('babelify')
 var cleanCSS = require('gulp-clean-css')
-var stringify = require('stringify')
 var lesshint = require('gulp-lesshint')
 
-gulp.task('browserify-dev', function () {
-  // set up the browserify instance on a task basis
-  var b = browserify({
-    entries: './client/index.js',
-    debug: true
-  })
-  .transform(stringify, {
-    appliesTo: { includeExtensions: ['.hjs', '.html', '.whatever'] }
-  })
-  .add('./client/index.js')
+function compile () {
+  var bundler = browserify('./client/index.js', { debug: true })
+    .transform(stringify, {
+      appliesTo: { includeExtensions: ['.html'] }
+    })
+    .transform('browserify-css')
+    .transform(babelify, {
+      presets: ['es2015']
+    })
 
-  return b.transform('browserify-css', { autoInject: true })
-    .transform(babelify.configure({
-      extensions: ['es6']
-    }))
-    .bundle()
-    .pipe(source('bundle.js'))
-    .pipe(gulp.dest('client/dist'))
-})
+  function rebundle () {
+    bundler.bundle()
+      .on('error', function (err) {
+        console.error(err)
+        this.emit('end')
+      })
+      .pipe(source('bundle.js'))
+      .pipe(buffer())
+      .pipe(sourcemaps.init({ loadMaps: true }))
+      .pipe(sourcemaps.write('./'))
+      .pipe(gulp.dest('./client/dist'))
+  }
 
-gulp.task('browserify', function () {
-  // set up the browserify instance on a task basis
-  var b = browserify({
-    entries: './client/index.js',
-    debug: true
-  })
+  rebundle()
+}
 
-  return b.transform('browserify-css', { autoInject: true })
-    .transform(babelify())
-    .bundle()
-    .pipe(source('bundle.js'))
-    .pipe(buffer())
-    .pipe(sourcemaps.init({loadMaps: true}))
-    .pipe(uglify())
-    .on('error', gutil.log)
-    .pipe(gulp.dest('client'))
+gulp.task('build', function () {
+  return compile()
 })
 
 gulp.task('jslint', function () {
-  return gulp.src(['./client/**/*.js', '!./client/dist/*'])
+  return gulp.src(['./**/*.js', '!./client/dist/*', '!./node_modules/**/*'])
     .pipe(standard())
     .pipe(standard.reporter('default', {
       breakOnError: true
@@ -63,10 +51,8 @@ gulp.task('jslint', function () {
 
 gulp.task('lesslint', function () {
   return gulp.src('./client/css/*.less')
-        .pipe(lesshint({
-          failOnWarning: true
-        }))
-        .pipe(lesshint.reporter())
+    .pipe(lesshint())
+    .pipe(lesshint.reporter())
 })
 
 gulp.task('lint', ['jslint', 'lesslint'])
@@ -85,17 +71,25 @@ gulp.task('default', function () {
     script: 'server/index.js',
     ext: 'js html less',
     env: { 'NODE_ENV': 'development' },
-    tasks: ['browserify-dev', 'less'],
+    tasks: ['build'],
     ignore: ['client/dist/bundle.js']
   })
 })
 
-gulp.task('run', function () {
-  nodemon({
-    script: 'server/index.js',
-    ext: 'js html',
-    env: { 'NODE_ENV': 'production' },
-    tasks: ['browserify'],
-    ignore: ['client/bundle.js']
-  })
-})
+// gulp.task('browserify', function () {
+//   // set up the browserify instance on a task basis
+//   var b = browserify({
+//     entries: './client/index.js',
+//     debug: true
+//   })
+
+//   return b.transform('browserify-css', { autoInject: true })
+//     .transform(babelify())
+//     .bundle()
+//     .pipe(source('bundle.js'))
+//     .pipe(buffer())
+//     .pipe(sourcemaps.init({loadMaps: true}))
+//     .pipe(uglify())
+//     .on('error', gutil.log)
+//     .pipe(gulp.dest('client'))
+// })

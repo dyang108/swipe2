@@ -1,10 +1,10 @@
-var angular = require('angular')
-
-require('angular-ui-router.statehelper')
-require('angular-ui-router')
-require('./css')
-var appRoot = require('./app')
-var template = require('./index.html')
+// var angular = require('angular')
+import angular from 'angular'
+import 'angular-ui-router.statehelper'
+import 'angular-ui-router'
+import './css'
+import appRoot from './app'
+import template from './index.html'
 
 var app = angular.module('app', [
   'ui.router',
