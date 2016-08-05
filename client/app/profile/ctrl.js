@@ -1,3 +1,3 @@
 class ProfileCtrl {}
 
-module.exports = ProfileCtrl
+export default ProfileCtrl

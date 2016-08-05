@@ -1,8 +1,8 @@
-var bootstrap = require('./bootstrap.min.css')
-var fontawesome = require('./font-awesome/css/font-awesome.min.css')
-var styles = require('./styles.css')
+import bootstrap from './bootstrap.min.css'
+import fontawesome from './font-awesome/css/font-awesome.min.css'
+import styles from './styles.css'
 
-module.exports = {
+export default {
   bootstrap,
   fontawesome,
   styles

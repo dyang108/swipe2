@@ -1,10 +1,10 @@
-var template = require('./tpl.html')
-var controller = require('./ctrl.js')
-var eat = require('./eat')
-var post = require('./post')
-var profile = require('./profile')
+import template from './tpl.html'
+import controller from './ctrl.js'
+import eat from './eat'
+import post from './post'
+import profile from './profile'
 
-module.exports = {
+export default {
   name: 'main',
   url: 'main',
   template: template,
@@ -14,5 +14,6 @@ module.exports = {
     post,
     profile
   ],
-  controllerAs: 'AppCtrl'
+  controllerAs: 'AppCtrl',
+  redirectTo: 'index.main.eat'
 }

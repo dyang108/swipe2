@@ -10,39 +10,59 @@ var standard = require('gulp-standard')
 var less = require('gulp-less')
 var cleanCSS = require('gulp-clean-css')
 var lesshint = require('gulp-lesshint')
+var rename = require('gulp-rename')
+var uglify = require('gulp-uglify')
+var ngAnnotate = require('gulp-ng-annotate')
 
-function compile () {
+function compile (isProd) {
   var bundler = browserify('./client/index.js', { debug: true })
     .transform(stringify, {
-      appliesTo: { includeExtensions: ['.html'] }
+      appliesTo: { includeExtensions: ['.html'] },
+      minify: isProd
     })
-    .transform('browserify-css')
+    .transform('browserify-css', {
+      autoInject: true,
+      minify: isProd
+    })
     .transform(babelify, {
       presets: ['es2015']
     })
 
   function rebundle () {
-    bundler.bundle()
+    return bundler.bundle()
       .on('error', function (err) {
         console.error(err)
         this.emit('end')
       })
       .pipe(source('bundle.js'))
+  }
+
+  var intermediate = rebundle()
+  if (isProd) {
+    return intermediate
+      .pipe(ngAnnotate())
       .pipe(buffer())
+      .pipe(rename('bundle.min.js'))
+      .pipe(uglify())
       .pipe(sourcemaps.init({ loadMaps: true }))
       .pipe(sourcemaps.write('./'))
       .pipe(gulp.dest('./client/dist'))
+  } else {
+    return intermediate
+      .pipe(gulp.dest('./client/dist'))
   }
-
-  rebundle()
 }
 
 gulp.task('build', function () {
   return compile()
 })
 
+gulp.task('compile-prod', function () {
+  return compile(true)
+})
+
 gulp.task('jslint', function () {
-  return gulp.src(['./**/*.js', '!./client/dist/*', '!./node_modules/**/*'])
+  return gulp.src(['./**/*.js', '!/**/*.min.js', '!./client/dist/*', '!./node_modules/**/*'])
     .pipe(standard())
     .pipe(standard.reporter('default', {
       breakOnError: true

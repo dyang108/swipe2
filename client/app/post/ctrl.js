@@ -1,7 +1,8 @@
 class PostCtrl {
+  /* @ngInject */
   constructor () {
     this.meal = {}
   }
 }
 
-module.exports = PostCtrl
+export default PostCtrl

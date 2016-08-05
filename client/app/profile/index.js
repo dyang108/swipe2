@@ -1,7 +1,7 @@
-var template = require('./tpl.html')
-var controller = require('./ctrl.js')
+import template from './tpl.html'
+import controller from './ctrl.js'
 
-module.exports = {
+export default {
   name: 'profile',
   url: '/profile',
   template: template,

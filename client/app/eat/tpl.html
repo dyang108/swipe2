@@ -1,5 +1,45 @@
 <div class="content">
-  <span><h1>Eat<span class="pull-right"><em>{{AppCtrl.date | date: 'h:mm a'}}</em></span></h1>
+  <span>
+  <h1>Eat<span class="pull-right">
+  <em>{{date | date: 'h:mm a'}}</em>
+  </span></h1>
   </span>
   <hr>
+  <form class="form-group form-inline">
+    <div class="input-group input-group-lg col-sm-4">
+      <span class="input-group-addon">show meals starting at</span>
+      <input class="form-control" type="time" name="time" ng-model="EatCtrl.startTime">
+    </div><span>&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" ng-model="hall.Carm"> Carm
+      </label>
+      <br>
+      <label>
+        <input type="checkbox" ng-model="hall.Dewick"> Dewick
+      </label>
+    </div>
+  </form>
+  <br>
+  <h3>upcoming from {{start_time | date: 'h:mm a'}}</h3>
+  <div ng-show="!isMeals">
+    <hr>
+    <h4>No meals found :-(</h4></div>
+  <div ng-init="getMeals()" ng-show="isMeals">
+    <table class="table meal-table">
+      <tr ng-repeat="meal in mealList" ng-show="hall[meal.hall]">
+        <td>
+          <div class="img-with-text"><img class="img-rounded propic" alt="table propic" src="img/favicon.png" ng-src="{{meal.img}}">
+            <h4 class="inner-text"><strong>{{meal.user}}</strong></h4></div>
+        </td>
+        <td>
+          <h3>{{meal.numswipes}}</h3>
+          <h4>swipe<span ng-show="meal.numswipes !== 1">s</span> at {{meal.hall}}</h4></td>
+        <td>
+          <h3 class="pull-right">{{meal.time | date: 'h:mm a'}}</h3>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <br>
 </div>
