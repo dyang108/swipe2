@@ -7,4 +7,8 @@ router
   .route('/meals')
   .post(meals.addMeal)
 
+router
+  .route('/meals/from/:after/to/:before')
+  .get(meals.getAll)
+
 module.exports = router

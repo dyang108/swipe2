@@ -3,9 +3,9 @@ var mongoose = require('mongoose')
 var Meal = new mongoose.Schema({
   user: String,
   img: String,
-  hall: String,
+  diningHall: String,
   time: Date,
-  numswipes: Number
+  numSwipes: Number
 })
 
 module.exports = mongoose.model('Meal', Meal)
